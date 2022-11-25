@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\User;
+use App\Entity\Client;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -29,15 +30,34 @@ class UsersFixtures extends Fixture
             $user->setUsername($faker->words(2, true));
             $user->setEmail($faker->email);
 
-           // $password = $this->$hasher->hashPassword($user, 'password');
-            $user->setPassword($faker->password);
+            $password = $this->hasher->hashPassword($user, 'password');
+            $user->setPassword($password);
+            // $user->setPassword($faker->password);
             
             if($i === 1)
                 $user->setRoles(['ROLE_ADMIN']);
             else
-                $user->setRoles(['ROLE_USER']); 
+                $user->setRoles(['ROLE_USER']);    
 
             $manager->persist($user);
+
+        }   
+        $manager->flush(); 
+
+
+        
+         //Creation des clients
+         for($j = 1; $j<=4; $j++){
+
+            $client = new Client();
+            $client->setName($faker->words(2, true));
+            $client->setEmail($faker->email);
+
+           // $password = $this->$hasher->hashPassword($user, 'password');
+            $client->setPassword($faker->password);
+            $client->getUser($user);
+
+            $manager->persist($client);
 
         }   
         $manager->flush(); 
