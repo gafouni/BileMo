@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PhoneController extends AbstractController
 {
-    /**
+    /** 
      * @Route("/phones/list", name="phoneList", methods={"GET"})
      */
     public function phoneList(PhoneRepository $phoneRepository, SerializerInterface $serializer): JsonResponse
