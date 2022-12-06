@@ -12,7 +12,7 @@ class PhonesFixtures extends Fixture
     public function load(ObjectManager $manager): void 
     {
         //Utilisation de Faker
-        $faker = Factory::create('fr_FR');
+        $faker = Factory::create('fr_FR'); 
         //Creation de 25 references de telephone
             for ($i = 0; $i < 25; $i++) {
                 $phone = new Phone();
