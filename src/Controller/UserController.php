@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -47,21 +48,32 @@ class UserController extends AbstractController
             $jsonUser = $serializer->serialize($user, "json");
             return new JsonResponse($jsonUser, Response::HTTP_OK, [], true);
         }
-        return new JsonResponse(null, Response::HTTO_NOT_FOUND); 
-
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        
     }
+        
+
+    
 
     /**
      * @Route("/api/users/new", name="user_new", methods={"POST", "GET"})
      */
     public function createUser(Request $request, UserRepository $userRepository, 
-                                SerializerInterface $serializer): JsonResponse
+                                SerializerInterface $serializer, UrlGeneratorInterface $urlGenerator): JsonResponse
 
     {
         //On recupere le contenu de la requete
         $data = $request->getContent();
         //On deserialise l'element $data
         $user = $serializer->deserialize($data, User::class, 'json');
+
+        //Verification des erreurs
+        // $errors = $validator->validate($user);
+
+        // if ($errors->count() > 0) {
+        //     return new JsonResponse($serializer->serialize($errors, 'json'), 
+        //     JsonResponse::HTTP_BAD_REQUEST, [], true);
+        // }
       
         $user->getCreatedAt(new \DateTime('now'));  
         //$user->setClient($this->getClient()); 
@@ -69,6 +81,8 @@ class UserController extends AbstractController
         $userNew = $userRepository->add($user);
 
         $jsonUserNew = $serializer->serialize($userNew, 'json');
+
+       
         
         return new JsonResponse($jsonUserNew, Response::HTTP_CREATED, [], true);
 
@@ -78,15 +92,15 @@ class UserController extends AbstractController
     /**
      * @Route("/api/users/{id}", name="deleteUser", methods= {"DELETE"})
      */
-    //public function deleteUser(int $id, User $user, EntityManagerInterface $em): JsonRespponse
-    public function deleteUser(int $id, User $user, UserRepositiry $userRepository): JsonRespponse
+    public function deleteUser( int $id, UserRepository $userRepository): JsonResponse
     {
-        $user = $userRepository->find($id);
-        $userRepository->remove($user, true);
-        // $em->remove($user);
-        // $em->flush();
 
-        return new JsonReponse(null, Response::HTTP_NO_CONTENT);
+        $user = $userRepository->find($id);
+
+        $user = new User;
+        $userRepository->remove($user, true);
+
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
 
     }
 

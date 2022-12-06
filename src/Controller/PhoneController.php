@@ -30,14 +30,14 @@ class PhoneController extends AbstractController
     /**
      * @Route("/phones/{id}", name="showPhone", methods={"GET"})
      */
-    public function showPhone(int $id, SerializerInterface $serialize, PhoneRepository $phoneRepository):JsonResponse
+    public function showPhone(int $id, SerializerInterface $serializer, PhoneRepository $phoneRepository):JsonResponse
     {
         $phone = $phoneRepository->find($id);
         if($phone){
             $jsonPhone = $serializer->serialize($phone, "json");
             return new JsonResponse($jsonPhone, Response::HTTP_OK, [], true);
         }
-        return new JsonResponse(null, Response::HTTO_NOT_FOUND);
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
 
     }
 
