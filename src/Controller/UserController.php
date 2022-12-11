@@ -56,27 +56,27 @@ class UserController extends AbstractController
     
 
     /**
-     * @Route("/api/users/new", name="user_new", methods={"POST", "GET"})
+     * @Route("/api/users", name="user_new", methods={"POST"})
      */
     public function createUser(Request $request, UserRepository $userRepository, 
                                 SerializerInterface $serializer, UrlGeneratorInterface $urlGenerator): JsonResponse
 
     {
-        //On recupere le contenu de la requete
+        //On recupere le contenu de la requete recue
         $data = $request->getContent();
         //On deserialise l'element $data
         $user = $serializer->deserialize($data, User::class, 'json');
 
         //Verification des erreurs
-        // $errors = $validator->validate($user);
+        $errors = $validator->validate($user);
 
-        // if ($errors->count() > 0) {
-        //     return new JsonResponse($serializer->serialize($errors, 'json'), 
-        //     JsonResponse::HTTP_BAD_REQUEST, [], true);
-        // }
+        if ($errors->count() > 0) {
+            return new JsonResponse($serializer->serialize($errors, 'json'), 
+            JsonResponse::HTTP_BAD_REQUEST, [], true);
+        }
       
-        $user->getCreatedAt(new \DateTime('now'));  
-        //$user->setClient($this->getClient()); 
+        $user->setCreatedAt(new \DateTimeImmutable('now'));  
+        
 
         $userNew = $userRepository->add($user);
 
