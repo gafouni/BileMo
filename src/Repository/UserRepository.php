@@ -56,6 +56,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->add($user, true);
     }
 
+
+    public function findAllWithPagination($page, $limit)
+   {
+       return $this->createQueryBuilder('p')
+           ->setFirstResult(($page - 1) * $limit)
+           ->orderBy('p.id', 'DESC')
+           ->setMaxResults(4)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

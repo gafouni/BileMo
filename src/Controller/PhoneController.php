@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Repository\PhoneRepository;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -20,11 +22,18 @@ class PhoneController extends AbstractController
      * @Route("/phones/list", name="phoneList", methods={"GET"})
      */
     public function phoneList(PhoneRepository $phoneRepository, SerializerInterface $serializer,
-                                Request $request): JsonResponse
+                                Request $request, TagAwareCacheInterface $cachePool): JsonResponse
     {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 4);
-        $phoneList = $phoneRepository->findAllWithPagination($page, $limit);
+
+        $idCache = "phoneList-" . $page . "-" . $limit;
+        $phoneList = $cachePool->get($idCache, function (ItemInterface $item) use ($phoneRepository, $page, $limit) {
+            $item->tag("phonesCache");
+            return $phoneRepository->findAllWithPagination($page, $limit);
+        });
+
+        // $phoneList = $phoneRepository->findAllWithPagination($page, $limit);
         $jsonPhoneList = $serializer->serialize($phoneList, 'json');
 
         return new JsonResponse($jsonPhoneList, Response::HTTP_OK, [], true);
