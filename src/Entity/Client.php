@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -27,7 +28,7 @@ class Client implements UserInterface,  PasswordAuthenticatedUserInterface
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
 
@@ -37,7 +38,8 @@ class Client implements UserInterface,  PasswordAuthenticatedUserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
 
@@ -84,30 +86,7 @@ class Client implements UserInterface,  PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    // public function getPassword(): ?string
-    // {
-    //     return $this->password;
-    // }
-
-    // public function setPassword(string $password): self
-    // {
-    //     $this->password = $password;
-
-    //     return $this;
-    // }
-
-    // public function getCreatedAt(): ?\DateTimeInterface
-    // {
-    //     return $this->createdAt;
-    // }
-
-    // public function setCreatedAt(?\DateTimeInterface $createdAt): self
-    // {
-    //     $this->createdAt = $createdAt;
-
-    //     return $this;
-    // }
+    
 
     
     /**
@@ -155,11 +134,12 @@ class Client implements UserInterface,  PasswordAuthenticatedUserInterface
     }
 
     /**
+     * @see UserInterface
      * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): string
     {
-        return $this->password;
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
@@ -201,17 +181,7 @@ class Client implements UserInterface,  PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function getClient(): ?Client
-    // {
-    //     return $this->client;
-    // }
-
-    // public function setClient(?Client $client): self
-    // {
-    //     $this->client = $client;
-
-    //     return $this;
-    // }
+    
 
     /**
      * @return Collection<int, User>
