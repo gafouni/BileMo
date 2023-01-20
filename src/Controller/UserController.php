@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use JMS\Serializer\Serializer;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 //use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\SerializerInterface;
+//use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -29,9 +30,13 @@ class UserController extends AbstractController
     /**
      * @Route("/api/users/list", name="userList", methods={"GET"})
      */
-    public function userList(UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
+    public function userList(UserRepository $userRepository, SerializerInterface $serializer,
+                            Request $request): JsonResponse
     {
-        $userList = $userRepository->findAll();
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 3);
+
+        $userList = $userRepository->findAllWithPagination($page, $limit);
         $jsonUserList = $serializer->serialize($userList, 'json');
 
         return new JsonResponse($jsonUserList, Response::HTTP_OK, [], true);
@@ -39,7 +44,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/api/users/{id}", name="UserShow", methods={"GET"})
+     * @Route("/api/users/{id}", name="userShow", methods={"GET"})
      */
     public function UserShow(int $id, SerializerInterface $serializer, UserRepository $userRepository):JsonResponse
     {
