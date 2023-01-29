@@ -20,15 +20,15 @@
   lancer le serveur de symfony: symfony server:start 
 
 * Installation de Postman:  
-  Pour tester les fonctionnalites de l'API, installer Postman, utiliser l'url suivant pour obtenir un token d'authentification:
-  https://127.0.0.1:8000/api/login_check
-  Copier le token ainsi obtenu. Il n'est valable qu'une heure.
+  Pour tester les fonctionnalites de l'API, installer Postman, utiliser l'url suivant pour obtenir un token d'authentification:  
+  https://127.0.0.1:8000/api/login_check  
+  Copier le token ainsi obtenu. Il n'est valable qu'une heure.  
   Lancez une requete avec dans le header la clé Authorisation et la valeur "Bearer votre_token" 
 
 * Documentation:  
-  Vous pouvez acceder a la documentation de l'API a l'adresse suivante en local:
+  Vous pouvez acceder a la documentation de l'API a l'adresse suivante en local:  
   https://127.0.0.1::8000/api/doc
-  
-   
+
+
 
 
