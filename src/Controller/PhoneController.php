@@ -25,10 +25,10 @@ class PhoneController extends AbstractController
      
     /**
      * Cette méthode permet de récupérer l'ensemble des telephones.
-     *
+     * 
      * @OA\Response(
      *     response=200,
-     *     description="Retourne la liste des telephones",
+     *     description="Liste des telephones",
      *     @OA\JsonContent(
      *        type="array",
      *        @OA\Items(ref=@Model(type=Phone::class))
@@ -49,14 +49,13 @@ class PhoneController extends AbstractController
      *     @OA\Schema(type="int")
      * )
      * @OA\Tag(name="Phones")
+     * @Security(name="Bearer")
      *
      * @param PhoneRepository $phoneRepository
      * @param SerializerInterface $serializer
      * @param Request $request
      * @return JsonResponse
      */
-    
-
     /** 
      * @Route("/phones/list", name="phoneList", methods={"GET"})
      */
@@ -81,12 +80,12 @@ class PhoneController extends AbstractController
 
 
 
-        /**
+    /**
      * Cette méthode permet de récupérer un telephone avec ses details.
      *
      * @OA\Response(
      *     response=200,
-     *     description="Retourne les details d'un telephone selectionne",
+     *     description="Details du telephone selectionne",
      *     @OA\JsonContent(
      *        type="array",
      *        @OA\Items(ref=@Model(type=Phone::class))
@@ -106,14 +105,13 @@ class PhoneController extends AbstractController
      * )
      *
      * @OA\Tag(name="Phones")
+     * @Security(name="Bearer")
      *
      * @param PhoneRepository $phoneRepository
      * @param SerializerInterface $serializer
      * @param Request $request
      * @return JsonResponse
      */
-
-
     /**
      * @Route("/phones/{id}", name="showPhone", methods={"GET"})
      */

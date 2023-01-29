@@ -2,18 +2,18 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
 use App\Entity\Client;
 use DateTimeImmutable;
 use JMS\Serializer\Serializer;
 use App\Repository\UserRepository;
+use App\Repository\ClientRepository;
 use JMS\Serializer\SerializerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializationContext;
-//use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-//use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -23,11 +23,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
-    private  UserPasswordHasherInterface $hasher;
+    private $userPasswordHacher;
 
-    public function __construct(UserPasswordHasherInterface $hasher)
+    public function __construct(UserPasswordHasherInterface $userPasswordHacher)
     {
-        $this->hasher = $hasher;
+        $this->userPasswordHasher = $userPasswordHacher;
     }
 
      /**   
@@ -35,10 +35,10 @@ class UserController extends AbstractController
      *
      * @OA\Response(
      *     response=200,
-     *     description="Retourne la liste des utilisateurs",
+     *     description="Liste des utilisateurs",
      *     @OA\JsonContent(
      *        type="array",
-     *        @OA\Items(ref=@Model(type=User::class))
+     *        @OA\Items(ref=@Model(type=User::class, groups={"getUsers}))
      *     )
      * )
      * 
@@ -56,11 +56,9 @@ class UserController extends AbstractController
      *     @OA\Schema(type="int")
      * )
      * @OA\Tag(name="Users")
-     *
+     * @Security(name="Bearer")
      * 
      */
-
-
     /**
      * @Route("/api/users/list", name="userList", methods={"GET"})
      */
@@ -71,7 +69,8 @@ class UserController extends AbstractController
         $limit = $request->get('limit', 3);
 
         $userList = $userRepository->findAllWithPagination($page, $limit);
-        $jsonUserList = $serializer->serialize($userList, 'json');
+        $context = SerializationContext::create()->setGroups(['getUsers']);
+        $jsonUserList = $serializer->serialize($userList, 'json', $context);
 
         return new JsonResponse($jsonUserList, Response::HTTP_OK, [], true);
     }
@@ -82,10 +81,10 @@ class UserController extends AbstractController
      *
      * @OA\Response(
      *     response=200,
-     *     description="Retourne les details d'un utilisateur",
+     *     description="Details de l'utilisateur",
      *     @OA\JsonContent(
      *        type="array",
-     *        @OA\Items(ref=@Model(type=User::class))
+     *        @OA\Items(ref=@Model(type=User::class, groups={"getUsers"}))
      *     )
      * )
      * 
@@ -103,11 +102,9 @@ class UserController extends AbstractController
      *
      * *
      * @OA\Tag(name="Users")
-     *
+     * @Security(name="Bearer")
      * 
      */    
-
-
     /**
      * @Route("/api/users/{id}", name="userShow", methods={"GET"})
      */
@@ -115,7 +112,8 @@ class UserController extends AbstractController
     {
         $user = $userRepository->find($id);
         if($user){
-            $jsonUser = $serializer->serialize($user, "json");
+            $context = SerializationContext::create()->setGroups(['getUsers']);
+            $jsonUser = $serializer->serialize($user, "json", $context);
             return new JsonResponse($jsonUser, Response::HTTP_OK, [], true);
         }
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
@@ -123,37 +121,46 @@ class UserController extends AbstractController
     }
         
     /** 
-        * @OA\Response(
-        *     response=201,
-        *     description="Affiche les details de l'utilisateur cree",
-        *     @SWG\Schema(
-        *         type="array",
-        *         @SWG\Items(ref=@Model(type=User::class))
-        *     )
-        * )
-        * 
-        * @OA\Parameter(
-        *     name="User",
-        *     in="body",
-        *     @Model(type=UserType::class)
-        * )
-        * @OA\Tag(name="users")
-        *
-        */
-    
-
+     * Cette methode permet de recuperer les details d'un utilisateur
+     * 
+     * @OA\Response(
+     *     response=201,
+     *     description="Details de l'utilisateur cree",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @SWG\Items(ref=@Model(type=User::class, groups={"getUsers"}))
+     *     )
+     * )
+     * 
+     * @OA\Parameter(
+     *     name="User",
+     *     in="body",
+     *     @Model(type=UserType::class)
+     * )
+     * @OA\Tag(name="users")
+     * @Security(name="Bearer") 
+     *
+     */
     /**
      * @Route("/api/users", name="user_new", methods={"POST"})
      */
-    public function createUser(Request $request, UserRepository $userRepository, 
+    public function createUser(Request $request, EntityManagerInterface $em, 
                                 SerializerInterface $serializer, UrlGeneratorInterface $urlGenerator,
-                                ValidatorInterface $validator): JsonResponse
+                                ValidatorInterface $validator, ClientRepository $clientRepository,
+                                UserPasswordHasherInterface $userPasswordHacher): JsonResponse
 
     {
-        //On recupere le contenu de la requete recue
+        // //On recupere le contenu de la requete recue
         $data = $request->getContent();
+
+        $user = new User();
+              
         //On deserialise l'element $data
         $user = $serializer->deserialize($data, User::class, 'json');
+        
+        $user->setPassword($userPasswordHacher->hashPassword($user, "password"));
+        $user->setClient($this->getUser()); 
+        $user->setCreatedAt(new \DateTime('now', ));
 
         //Verification des erreurs
         $errors = $validator->validate($user);
@@ -162,39 +169,36 @@ class UserController extends AbstractController
             return new JsonResponse($serializer->serialize($errors, 'json'), 
             JsonResponse::HTTP_BAD_REQUEST, [], true);
         }
-      
-        $client = new Client();
-
-        $user->getClient($client);
-        $user->getCreatedAt(new DateTimeImmutable('now'));  
-        
-
-        $userNew = $userRepository->add($user, true);
-
-        $jsonUserNew = $serializer->serialize($userNew, 'json');
-
        
+        //$user->setCreatedAt(new DateTimeImmutable('now'));  
         
-        return new JsonResponse($jsonUserNew, Response::HTTP_CREATED, [], true);
+        $em->persist($user);
+        $em->flush();
+        
+        $context = SerializationContext::create()->setGroups(['getUsers']);
+        $jsonUser = $serializer->serialize($user, 'json', $context);
+        return new JsonResponse($jsonUser, Response::HTTP_CREATED, [], true);
 
     }
 
 
-        /**
-        * @OA\Response(
-        *     response=204,
-        *     description="L'utilisateur a ete supprime"
-        * )
-        * 
-        * @OA\Response(
-        *     response=404,
-        *     description="L'utilisateur n'existe pas"
-        * )
-        *    
-        * @OA\Tag(name="users")
-        */
-
-
+    /**
+     * Cette methode permet de supprimer un utilisateur
+     * 
+     * @OA\Response(
+     *     response=204,
+     *     description="L'utilisateur a ete supprime"
+     * )
+     * 
+     * @OA\Response(
+     *     response=404,
+     *     description="L'utilisateur n'existe pas"
+     * )
+     *    
+     * @OA\Tag(name="users")
+     * @Security(name="Bearer")    
+     *    
+     */
     /**
      * @Route("/api/users/{id}", name="deleteUser", methods= {"DELETE"})
      */
