@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ClientRepository;
+use JMS\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,32 +20,38 @@ class Client implements UserInterface,  PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"getUsers"}) 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"getUsers"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Groups({"getUsers"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"getUsers"})
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"getUsers"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"getUsers"})
      */
     private $createdAt;
 
