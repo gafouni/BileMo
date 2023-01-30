@@ -27,7 +27,7 @@
 
 * Documentation:  
   Vous pouvez acceder a la documentation de l'API a l'adresse suivante en local:  
-  https://127.0.0.1::8000/api/doc
+  https://127.0.0.1:8000/api/doc
 
 
 
