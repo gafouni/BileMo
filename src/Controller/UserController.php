@@ -12,10 +12,14 @@ use App\Repository\ClientRepository;
 use JMS\Serializer\SerializerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializationContext;
+use Symfony\Contracts\Cache\ItemInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,14 +29,22 @@ class UserController extends AbstractController
 {
     private $userPasswordHacher;
 
-    public function __construct(UserPasswordHasherInterface $userPasswordHacher)
+    public function __construct(UserPasswordHasherInterface $userPasswordHacher, 
+                                SerializerInterface $serializer)
     {
         $this->userPasswordHasher = $userPasswordHacher;
+        $this->serializer = $serializer;
     }
 
-     /**   
-     *  Cette méthode permet de récupérer l'ensemble des utilisateurs.
-     *
+     /**  
+     * 
+     * 
+     * Cette méthode permet de récupérer l'ensemble des utilisateurs.
+     * 
+     * @OA\Get(
+     *      path = "/api/users/list",
+     *      name = "userList", 
+     *      methods = {"GET"})
      * @OA\Response(
      *     response=200,
      *     description="Liste des utilisateurs",
@@ -58,21 +70,36 @@ class UserController extends AbstractController
      * @OA\Tag(name="Users")
      * @Security(name="Bearer")
      * 
+     * @param PhoneRepository $phoneRepository
+     * @param PaginatorInterface $paginatorInterface
+     * @param SerializerInterface $serializer
+     * @param Request $request
+     * @param CacheInterface $cache
+     * @return JsonResponse
      */
     /**
      * @Route("/api/users/list", name="userList", methods={"GET"})
      */
     public function userList(UserRepository $userRepository, SerializerInterface $serializer,
-                            Request $request): JsonResponse
+                            Request $request, TagAwareCacheInterface $cachePool): JsonResponse
     {
-        $page = $request->get('page', 1);
-        $limit = $request->get('limit', 3);
 
-        $userList = $userRepository->findAllWithPagination($page, $limit);
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 4);
+
+        $idCache = "userList-" . $page . "-" . $limit;
+        $userList = $cachePool->get($idCache, function (ItemInterface $item) use ($userRepository,
+            $page, $limit) {
+            $item->tag("usersCache");
+            return $userRepository->findAllWithPagination($page, $limit);
+        });
+
         $context = SerializationContext::create()->setGroups(['getUsers']);
+
         $jsonUserList = $serializer->serialize($userList, 'json', $context);
 
         return new JsonResponse($jsonUserList, Response::HTTP_OK, [], true);
+        
     }
 
 

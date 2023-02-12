@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 //use Doctrine\ORM\\Mapping as Colmn;
 use App\Repository\UserRepository;
 use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as Serializer;
 use Hateoas\Configuration\Annotation as Hateoas;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -22,7 +23,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  *      "self",
  *      href = @Hateoas\Route(
  *          "userShow",
- *          parameters = { "id" = "expr(object.getId())" }
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true,
  *      ),
  *      exclusion = @Hateoas\Exclusion(groups="getUsers")
  * )

@@ -4,16 +4,17 @@ namespace App\Controller;
 use JMS\Serializer\Serializer;
 use OpenApi\Annotations as OA;
 use App\Repository\PhoneRepository;
+use JMS\Serializer\SerializerInterface;
+use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Contracts\Cache\ItemInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
-use JMS\Serializer\SerializerInterface;
-use JMS\Serializer\SerializationContext;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -22,7 +23,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PhoneController extends AbstractController
 {
-     
+    // public function __construct(PaginatorInterface $paginator)
+    // {
+    //     $this->paginator = $paginator;
+        
+    // }
+ 
+
     /**
      * Cette méthode permet de récupérer l'ensemble des telephones.
      * 
@@ -53,6 +60,7 @@ class PhoneController extends AbstractController
      *
      * @param PhoneRepository $phoneRepository
      * @param SerializerInterface $serializer
+     * @param PaginatorInterface $paginator
      * @param Request $request
      * @return JsonResponse
      */
@@ -62,18 +70,19 @@ class PhoneController extends AbstractController
     public function phoneList(PhoneRepository $phoneRepository, SerializerInterface $serializer,
                                 Request $request, TagAwareCacheInterface $cachePool): JsonResponse
 
-    {
+    {        
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 4);
 
         $idCache = "phoneList-" . $page . "-" . $limit;
-        $phoneList = $cachePool->get($idCache, function (ItemInterface $item) use ($phoneRepository, $page, $limit) {
+        $phoneList = $cachePool->get($idCache, function (ItemInterface $item) use ($phoneRepository,
+            $page, $limit) {
             $item->tag("phonesCache");
             return $phoneRepository->findAllWithPagination($page, $limit);
         });
 
-        // $phoneList = $phoneRepository->findAllWithPagination($page, $limit);
         $jsonPhoneList = $serializer->serialize($phoneList, 'json');
+        
 
         return new JsonResponse($jsonPhoneList, Response::HTTP_OK, [], true);
     }
