@@ -32,7 +32,7 @@
         "symfony/twig-bundle": "^5.4",
         "symfony/validator": "^5.4",
         "symfony/yaml": "5.4.*",
-        "willdurand/hateoas-bundle": "^2.5"
+        "willdurand/hateoas-bundle": "dev-master"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",

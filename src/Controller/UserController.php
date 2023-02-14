@@ -41,16 +41,12 @@ class UserController extends AbstractController
      * 
      * Cette méthode permet de récupérer l'ensemble des utilisateurs.
      * 
-     * @OA\Get(
-     *      path = "/api/users/list",
-     *      name = "userList", 
-     *      methods = {"GET"})
      * @OA\Response(
      *     response=200,
      *     description="Liste des utilisateurs",
      *     @OA\JsonContent(
      *        type="array",
-     *        @OA\Items(ref=@Model(type=User::class, groups={"getUsers}))
+     *        @OA\Items(ref=@Model(type=User::class, groups={"getUsers"}))
      *     )
      * )
      * 
@@ -70,11 +66,9 @@ class UserController extends AbstractController
      * @OA\Tag(name="Users")
      * @Security(name="Bearer")
      * 
-     * @param PhoneRepository $phoneRepository
-     * @param PaginatorInterface $paginatorInterface
+     * @param UserRepository $userRepository
      * @param SerializerInterface $serializer
      * @param Request $request
-     * @param CacheInterface $cache
      * @return JsonResponse
      */
     /**
@@ -111,7 +105,7 @@ class UserController extends AbstractController
      *     description="Details de l'utilisateur",
      *     @OA\JsonContent(
      *        type="array",
-     *        @OA\Items(ref=@Model(type=User::class, groups={"getUsers"}))
+     *        @OA\Items(ref=@Model(type=User::class))
      *     )
      * )
      * 
@@ -130,6 +124,10 @@ class UserController extends AbstractController
      * *
      * @OA\Tag(name="Users")
      * @Security(name="Bearer")
+     * 
+     * @param int $id
+     * @param UserRepository $userRepository
+     * @return JsonResponse
      * 
      */    
     /**

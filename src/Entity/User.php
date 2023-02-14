@@ -24,17 +24,14 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  *      href = @Hateoas\Route(
  *          "userShow",
  *          parameters = { "id" = "expr(object.getId())" },
- *          absolute = true,
+ *          absolute = true
  *      ),
  *      exclusion = @Hateoas\Exclusion(groups="getUsers")
  * )
  *
- */
-
-
- /**
+ * 
  * @Hateoas\Relation(
- *      "delete",
+ *      "deleteUser",
  *      href = @Hateoas\Route(
  *          "deleteUser",
  *          parameters = { "id" = "expr(object.getId())" }
@@ -42,9 +39,6 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * )
  *
  */
-
-
-
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)

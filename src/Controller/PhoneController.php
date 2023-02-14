@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-use JMS\Serializer\Serializer;
+//use JMS\Serializer\Serializer;
 use OpenApi\Annotations as OA;
 use App\Repository\PhoneRepository;
 use JMS\Serializer\SerializerInterface;
@@ -116,9 +116,9 @@ class PhoneController extends AbstractController
      * @OA\Tag(name="Phones")
      * @Security(name="Bearer")
      *
+     * @param int $id
      * @param PhoneRepository $phoneRepository
      * @param SerializerInterface $serializer
-     * @param Request $request
      * @return JsonResponse
      */
     /**

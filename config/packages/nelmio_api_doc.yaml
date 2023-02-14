@@ -24,9 +24,11 @@ nelmio_api_doc:
                         - Login
                     summary: Permet d'obtenir le token JWT pour se logger.
                     requestBody:
+                        description: Creer un nouveau token JWT
                         content:
                             application/json:
                                 schema:
+                                    $ref: 
                                     properties:
                                         username:
                                             type: string
@@ -39,6 +41,8 @@ nelmio_api_doc:
                             content:
                                 application/json:
                                     schema:
+                                        $ref: 
+
                                         type: object
                                         properties:
                                             token:
@@ -46,10 +50,14 @@ nelmio_api_doc:
                                             refresh_token:
                                                 type: string
                         '401':
-                            description: Invalid credentials
+                            description: Identifiants incorects
                         '400':
                             description: Invalid JSON.
                     security: []
+
+    # models: 
+    #     names:
+    #         - {alias: MainUser, }
 
     areas: # to filter documented areas
         path_patterns:
