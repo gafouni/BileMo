@@ -75,20 +75,19 @@ class UserController extends AbstractController
      * @Route("/api/users/list", name="userList", methods={"GET"})
      */
     public function userList(UserRepository $userRepository, SerializerInterface $serializer,
-                            Request $request, TagAwareCacheInterface $cachePool): JsonResponse
+                            Request $request, TagAwareCacheInterface $cachePool,
+                            PaginatorInterface $paginator): JsonResponse
     {
 
-        $page = $request->get('page', 1);
-        $limit = $request->get('limit', 4);
+        $data = $userRepository->findAll();
 
-        $idCache = "userList-" . $page . "-" . $limit;
-        $userList = $cachePool->get($idCache, function (ItemInterface $item) use ($userRepository,
-            $page, $limit) {
-            $item->tag("usersCache");
-            return $userRepository->findAllWithPagination($page, $limit);
-        });
+        $userList = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            4
+        );
 
-        $context = SerializationContext::create()->setGroups(['getUsers']);
+        $context = SerializationContext::create()->setGroups(['getUsers', 'Default']);
 
         $jsonUserList = $serializer->serialize($userList, 'json', $context);
 

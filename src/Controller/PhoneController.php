@@ -68,18 +68,17 @@ class PhoneController extends AbstractController
      * @Route("/phones/list", name="phoneList", methods={"GET"})
      */
     public function phoneList(PhoneRepository $phoneRepository, SerializerInterface $serializer,
-                                Request $request, TagAwareCacheInterface $cachePool): JsonResponse
+                                Request $request, TagAwareCacheInterface $cachePool, 
+                                PaginatorInterface $paginator): JsonResponse
 
     {        
-        $page = $request->get('page', 1);
-        $limit = $request->get('limit', 4);
+        $data = $phoneRepository->findAll();
 
-        $idCache = "phoneList-" . $page . "-" . $limit;
-        $phoneList = $cachePool->get($idCache, function (ItemInterface $item) use ($phoneRepository,
-            $page, $limit) {
-            $item->tag("phonesCache");
-            return $phoneRepository->findAllWithPagination($page, $limit);
-        });
+        $phoneList = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            4
+        );
 
         $jsonPhoneList = $serializer->serialize($phoneList, 'json');
         

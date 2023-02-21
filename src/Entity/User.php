@@ -73,7 +73,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
      * @Groups({"getUsers"})    
      */
     private $password;
-
+ 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"getUsers"})

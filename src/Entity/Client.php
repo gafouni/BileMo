@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 class Client implements UserInterface,  PasswordAuthenticatedUserInterface
 {
     /**
-     * @ORM\Id
+     * @ORM\Id 
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups({"getUsers"}) 
@@ -57,6 +57,7 @@ class Client implements UserInterface,  PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="client")
+     * @Groups({"getClient"})
      */
     private $user;
 
