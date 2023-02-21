@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `client`
 --
 
-CREATE TABLE `client` (
+CREATE TABLE client (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `client` (
 -- Déchargement des données de la table `client`
 --
 
-INSERT INTO `client` (`id`, `name`, `email`, `password`, `created_at`, `roles`) VALUES
+INSERT INTO client (`id`, `name`, `email`, `password`, `created_at`, `roles`) VALUES
 (14, 'aliquid', 'martine.andre@cousin.net', '$2y$13$V1xEIh9SuWfvHECXSmP3wuFY/ql0kaKM88uxz.yu1kv/r2tvpLSTW', '2023-01-22 18:12:26', '[\"ROLE_USER\"]'),
 (15, 'iusto', 'dominique.gallet@breton.fr', '$2y$13$cyXND68a4VcGFFB5CmBm4e64cth7EqD3YfE.Qg3wc0WEcRDMSpeT6', '2023-01-22 18:12:30', '[\"ROLE_USER\"]'),
 (16, 'dignissimos', 'xgaillard@laposte.net', '$2y$13$nDk3HIQNvvWL1Wzrm/B6EOvzpdHWZULNAYifI9sGrQ/UGY7eIQimu', '2023-01-22 18:12:35', '[\"ROLE_USER\"]'),
@@ -53,7 +53,7 @@ INSERT INTO `client` (`id`, `name`, `email`, `password`, `created_at`, `roles`) 
 -- Structure de la table `doctrine_migration_versions`
 --
 
-CREATE TABLE `doctrine_migration_versions` (
+CREATE TABLE doctrine_migration_versions (
   `version` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
   `execution_time` int(11) DEFAULT NULL
@@ -63,7 +63,7 @@ CREATE TABLE `doctrine_migration_versions` (
 -- Déchargement des données de la table `doctrine_migration_versions`
 --
 
-INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
+INSERT INTO doctrine_migration_versions (`version`, `executed_at`, `execution_time`) VALUES
 ('DoctrineMigrations\\Version20221118124834', '2022-11-18 13:49:41', 653),
 ('DoctrineMigrations\\Version20221121110526', '2022-11-21 12:06:13', 1332),
 ('DoctrineMigrations\\Version20221121145503', '2022-11-21 15:56:23', 1792),
@@ -83,7 +83,7 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 -- Structure de la table `phone`
 --
 
-CREATE TABLE `phone` (
+CREATE TABLE phone (
   `id` int(11) NOT NULL,
   `model` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `reference` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE `phone` (
 -- Déchargement des données de la table `phone`
 --
 
-INSERT INTO `phone` (`id`, `model`, `reference`, `color`, `description`, `price`) VALUES
+INSERT INTO phone (`id`, `model`, `reference`, `color`, `description`, `price`) VALUES
 (867, 'non', 'qui dolorem rem', 'facilis', 'qui assumenda aut dignissimos placeat deserunt omnis eum autem nemo', 932),
 (868, 'facere', 'autem commodi doloribus', 'totam', 'necessitatibus sit quia et harum et enim quo cupiditate nulla', 1403),
 (869, 'beatae', 'error sapiente ipsam', 'aperiam', 'eum vel aut laudantium facilis similique earum quam quaerat explicabo', 1278),
@@ -129,7 +129,7 @@ INSERT INTO `phone` (`id`, `model`, `reference`, `color`, `description`, `price`
 -- Structure de la table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE user (
   `id` int(11) NOT NULL,
   `username` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -142,7 +142,7 @@ CREATE TABLE `user` (
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `email`, `password`, `created_at`, `client_id`) VALUES
+INSERT INTO user (`id`, `username`, `email`, `password`, `created_at`, `client_id`) VALUES
 (145, 'quos nemo', 'imbert.therese@bonnet.com', '$2y$13$FmcTFuhKtluXUm0JafALIuFpRI0QLOo7xLObQeI1dHUlgWWqMfwyi', '2023-01-22 18:12:26', 14),
 (146, 'facilis officia', 'courtois.jeanne@noos.fr', '$2y$13$07Qte73vnYCHsv0EqzrjWOT4YY0p0xtJAdO/XT2PtTCjo.OZY3gyO', '2023-01-22 18:12:27', 14),
 (147, 'reiciendis neque', 'roger.olivier@andre.net', '$2y$13$6IhD205EnaE2o2haqTLzv.Vu7ER8MAqCIs9AdgPz0DFT66UNX8/Jy', '2023-01-22 18:12:28', 14),
@@ -177,26 +177,26 @@ INSERT INTO `user` (`id`, `username`, `email`, `password`, `created_at`, `client
 --
 -- Index pour la table `client`
 --
-ALTER TABLE `client`
+ALTER TABLE client
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_C7440455E7927C74` (`email`);
 
 --
 -- Index pour la table `doctrine_migration_versions`
 --
-ALTER TABLE `doctrine_migration_versions`
+ALTER TABLE doctrine_migration_versions
   ADD PRIMARY KEY (`version`);
 
 --
 -- Index pour la table `phone`
 --
-ALTER TABLE `phone`
+ALTER TABLE phone
   ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `user`
 --
-ALTER TABLE `user`
+ALTER TABLE user
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`),
   ADD KEY `IDX_8D93D64919EB6921` (`client_id`);
