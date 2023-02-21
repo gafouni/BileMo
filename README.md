@@ -1,5 +1,5 @@
 ## Description
-* BileMo  est une API exposant un catalogue de telephone portable. Ce projet m'a permis d'apprendre a developper une API REST avec le framework Symfony.  Les diagrammes UML se trouvent dans le dossier "Diagrams".  Versions: PHP 7.4.12  Symfony 5.4
+* BileMo  est une API exposant un catalogue de telephone portable. Ce projet m'a permis d'apprendre a developper une API REST avec le framework Symfony.  Les diagrammes UML se trouvent dans le dossier "Diagrams".  L'analyse Codacy est disponible a l'url suivante: https://app.codacy.com/gh/gafouni/bilemo/dashboard  Versions: PHP 7.4.12  Symfony 5.4
 
 ---------------------------------
 ## Installation
