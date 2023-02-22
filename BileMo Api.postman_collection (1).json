@@ -1,0 +1,670 @@
+{
+	"info": {
+		"_postman_id": "77669fab-4594-4036-b3e8-17cd1ed06a10",
+		"name": "BileMo Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24504963"
+	},
+	"item": [
+		{
+			"name": "https://127.0.0.1:8000/api/login_check",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"martine.andre@cousin.net\",\r\n    \"password\": \"password\"\r\n}"
+				},
+				"url": {
+					"raw": "https://127.0.0.1:8000/api/login_check",
+					"protocol": "https",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login_check"
+					]
+				},
+				"description": "Generate an authentification token"
+			},
+			"response": []
+		},
+		{
+			"name": "https://127.0.0.1:8000/api/phones/list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY5MDQyNDksImV4cCI6MTY3NjkwNjA0OSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.Qr3sOIxFCDrlmWGl_quyIC17iZysDk9VYqP0LghRNgt8B6eU9IgngRZkPoqzKe3ywyWZm2EQdfbrMKf_Q9duK-V3VTM6B3FW9lQksioJ3VDi4OG4YKTYqpC1vlctTT2sDjarw24IhKxyDHjia_QFIC_9fJw_evVURIfMNBMGXehi5RH_GhKOFHdELWmxC3g1rDB7R2gRYKf4AULhHUGULPGetnW4FEJ0F1lNgaOiS2ib-uNdRfOXNWAyEAZdtRBcvQkB4DGUJtHVj7LdWSR1sjCFq-WJ3YH28-UDiAJiGVwIeCO0yXQY3FS4f8LWEiDrgOXJ5VNKcfhyWv7loD4B3Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://127.0.0.1:8000/api/phones/list",
+					"protocol": "https",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"phones",
+						"list"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "4",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Get the phones list"
+			},
+			"response": [
+				{
+					"name": "https://127.0.0.1:8000/api/phones/list",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY5MDQyNDksImV4cCI6MTY3NjkwNjA0OSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.Qr3sOIxFCDrlmWGl_quyIC17iZysDk9VYqP0LghRNgt8B6eU9IgngRZkPoqzKe3ywyWZm2EQdfbrMKf_Q9duK-V3VTM6B3FW9lQksioJ3VDi4OG4YKTYqpC1vlctTT2sDjarw24IhKxyDHjia_QFIC_9fJw_evVURIfMNBMGXehi5RH_GhKOFHdELWmxC3g1rDB7R2gRYKf4AULhHUGULPGetnW4FEJ0F1lNgaOiS2ib-uNdRfOXNWAyEAZdtRBcvQkB4DGUJtHVj7LdWSR1sjCFq-WJ3YH28-UDiAJiGVwIeCO0yXQY3FS4f8LWEiDrgOXJ5VNKcfhyWv7loD4B3Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://127.0.0.1:8000/api/phones/list",
+							"protocol": "https",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"phones",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Allow",
+							"value": "GET"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Feb 2023 14:49:04 GMT"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.12"
+						},
+						{
+							"key": "X-Robots-Tag",
+							"value": "noindex"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1868"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"currentPageNumber\": 1,\n    \"numItemsPerPage\": 4,\n    \"items\": [\n        {\n            \"id\": 867,\n            \"model\": \"non\",\n            \"reference\": \"qui dolorem rem\",\n            \"color\": \"facilis\",\n            \"description\": \"qui assumenda aut dignissimos placeat deserunt omnis eum autem nemo\",\n            \"price\": 932\n        },\n        {\n            \"id\": 868,\n            \"model\": \"facere\",\n            \"reference\": \"autem commodi doloribus\",\n            \"color\": \"totam\",\n            \"description\": \"necessitatibus sit quia et harum et enim quo cupiditate nulla\",\n            \"price\": 1403\n        },\n        {\n            \"id\": 869,\n            \"model\": \"beatae\",\n            \"reference\": \"error sapiente ipsam\",\n            \"color\": \"aperiam\",\n            \"description\": \"eum vel aut laudantium facilis similique earum quam quaerat explicabo\",\n            \"price\": 1278\n        },\n        {\n            \"id\": 870,\n            \"model\": \"culpa\",\n            \"reference\": \"non aut sunt\",\n            \"color\": \"fugit\",\n            \"description\": \"maxime error et omnis nesciunt beatae dolorum sunt temporibus magnam\",\n            \"price\": 1498\n        }\n    ],\n    \"totalCount\": 25,\n    \"paginatorOptions\": {\n        \"pageParameterName\": \"page\",\n        \"sortFieldParameterName\": \"sort\",\n        \"sortDirectionParameterName\": \"direction\",\n        \"filterFieldParameterName\": \"filterField\",\n        \"filterValueParameterName\": \"filterValue\",\n        \"distinct\": true,\n        \"pageOutOfRange\": \"ignore\",\n        \"defaultLimit\": 10\n    },\n    \"customParameters\": [],\n    \"route\": \"api_phoneList\",\n    \"params\": [],\n    \"pageRange\": 5,\n    \"template\": \"@KnpPaginator/Pagination/sliding.html.twig\",\n    \"sortableTemplate\": \"@KnpPaginator/Pagination/sortable_link.html.twig\",\n    \"filtrationTemplate\": \"@KnpPaginator/Pagination/filtration.html.twig\"\n}"
+				}
+			]
+		},
+		{
+			"name": "https://127.0.0.1:8000/api/phones/868",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY4ODUyMTMsImV4cCI6MTY3Njg4NzAxMywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.TCUxiUDRWpgEtHaZg5jZA8orw8-7gVzGQqbSBPjNgbD0JtafB_hcPnblVoQTS29pEhkiVPD_W_dxlDIgnBDWLwJndtPdoaZ5c3NMlMfGknHKylkfXiJZlVWUC7U1hR1jRxCHMax4M1jjMeSNDZPHV_UCei-JQLfopnqePLyGDKTfrG6m-bFXoA2dOHrLZqwwxmaVJ846ptFEpjutF-iQff8AjJmCUcHmjF2EswrCvHBSeguko5oGxQ5t8HHDVQrP3Jq5fSrJS-xsSoKsIjBflVetiksWodaFcRNt32HZVDfqdxKhINSulFgufBbeJoh18Rg2rhXwyIFc8GZ9eEjq3w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://127.0.0.1:8000/api/phones/868",
+					"protocol": "https",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"phones",
+						"868"
+					]
+				},
+				"description": "Get the details of a phone depending to its id"
+			},
+			"response": [
+				{
+					"name": "https://127.0.0.1:8000/api/phones/868",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY4ODUyMTMsImV4cCI6MTY3Njg4NzAxMywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.TCUxiUDRWpgEtHaZg5jZA8orw8-7gVzGQqbSBPjNgbD0JtafB_hcPnblVoQTS29pEhkiVPD_W_dxlDIgnBDWLwJndtPdoaZ5c3NMlMfGknHKylkfXiJZlVWUC7U1hR1jRxCHMax4M1jjMeSNDZPHV_UCei-JQLfopnqePLyGDKTfrG6m-bFXoA2dOHrLZqwwxmaVJ846ptFEpjutF-iQff8AjJmCUcHmjF2EswrCvHBSeguko5oGxQ5t8HHDVQrP3Jq5fSrJS-xsSoKsIjBflVetiksWodaFcRNt32HZVDfqdxKhINSulFgufBbeJoh18Rg2rhXwyIFc8GZ9eEjq3w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://127.0.0.1:8000/api/phones/868",
+							"protocol": "https",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"phones",
+								"868"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Allow",
+							"value": "GET"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Feb 2023 09:30:07 GMT"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.12"
+						},
+						{
+							"key": "X-Robots-Tag",
+							"value": "noindex"
+						},
+						{
+							"key": "Content-Length",
+							"value": "211"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 868,\n    \"model\": \"facere\",\n    \"reference\": \"autem commodi doloribus\",\n    \"color\": \"totam\",\n    \"description\": \"necessitatibus sit quia et harum et enim quo cupiditate nulla\",\n    \"price\": 1403\n}"
+				}
+			]
+		},
+		{
+			"name": "https://127.0.0.1:8000/api/users/list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY5NzI5NjQsImV4cCI6MTY3Njk3NDc2NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.V7dCdOz2UMmj1-O2nwWLJRa3H7kjkV-ad6V6G1o_SPA3rPL2wWdbg6Dp-ozf6urH7WT1s022u9BHsFni7qbfbseeUeiEh7o-Lr8L-9jhWpdx0tr1nwil3uC3WhY9JtiV9IPQPi0_rx2rE2fa5XaXt77D2jhUyqH0g2AfG54an_Nawn0_B42NU-UhfYYAGxRpppiyTaiFp4LFR3-bpGZpDmtf3PPZx-eC4mVfkgggtcGMCBzAnMBmcyqe8JUVKQpfpphMBrGoMN1ccBiI-OUGjYNPrPAhuGA720F7eL4oqY3BL88YYEef1wuY0BvTVR4oCPsdrTGwXhi3G3xjJzcUuw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://127.0.0.1:8000/api/users/list",
+					"protocol": "https",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"list"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Get the users list"
+			},
+			"response": [
+				{
+					"name": "https://127.0.0.1:8000/api/users/list",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY5NzI5NjQsImV4cCI6MTY3Njk3NDc2NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.V7dCdOz2UMmj1-O2nwWLJRa3H7kjkV-ad6V6G1o_SPA3rPL2wWdbg6Dp-ozf6urH7WT1s022u9BHsFni7qbfbseeUeiEh7o-Lr8L-9jhWpdx0tr1nwil3uC3WhY9JtiV9IPQPi0_rx2rE2fa5XaXt77D2jhUyqH0g2AfG54an_Nawn0_B42NU-UhfYYAGxRpppiyTaiFp4LFR3-bpGZpDmtf3PPZx-eC4mVfkgggtcGMCBzAnMBmcyqe8JUVKQpfpphMBrGoMN1ccBiI-OUGjYNPrPAhuGA720F7eL4oqY3BL88YYEef1wuY0BvTVR4oCPsdrTGwXhi3G3xjJzcUuw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://127.0.0.1:8000/api/users/list",
+							"protocol": "https",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Allow",
+							"value": "GET"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 21 Feb 2023 10:09:59 GMT"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.12"
+						},
+						{
+							"key": "X-Robots-Tag",
+							"value": "noindex"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"currentPageNumber\": 1,\n    \"numItemsPerPage\": 4,\n    \"items\": [\n        {\n            \"id\": 145,\n            \"username\": \"quos nemo\",\n            \"email\": \"imbert.therese@bonnet.com\",\n            \"password\": \"$2y$13$FmcTFuhKtluXUm0JafALIuFpRI0QLOo7xLObQeI1dHUlgWWqMfwyi\",\n            \"createdAt\": \"2023-01-22T18:12:26+01:00\",\n            \"client\": {\n                \"id\": 14,\n                \"name\": \"aliquid\",\n                \"email\": \"martine.andre@cousin.net\",\n                \"roles\": [\n                    \"ROLE_USER\"\n                ],\n                \"password\": \"$2y$13$V1xEIh9SuWfvHECXSmP3wuFY/ql0kaKM88uxz.yu1kv/r2tvpLSTW\",\n                \"createdAt\": \"2023-01-22T18:12:26+01:00\"\n            }\n        },\n        {\n            \"id\": 146,\n            \"username\": \"facilis officia\",\n            \"email\": \"courtois.jeanne@noos.fr\",\n            \"password\": \"$2y$13$07Qte73vnYCHsv0EqzrjWOT4YY0p0xtJAdO/XT2PtTCjo.OZY3gyO\",\n            \"createdAt\": \"2023-01-22T18:12:27+01:00\",\n            \"client\": {\n                \"id\": 14,\n                \"name\": \"aliquid\",\n                \"email\": \"martine.andre@cousin.net\",\n                \"roles\": [\n                    \"ROLE_USER\"\n                ],\n                \"password\": \"$2y$13$V1xEIh9SuWfvHECXSmP3wuFY/ql0kaKM88uxz.yu1kv/r2tvpLSTW\",\n                \"createdAt\": \"2023-01-22T18:12:26+01:00\"\n            }\n        },\n        {\n            \"id\": 147,\n            \"username\": \"reiciendis neque\",\n            \"email\": \"roger.olivier@andre.net\",\n            \"password\": \"$2y$13$6IhD205EnaE2o2haqTLzv.Vu7ER8MAqCIs9AdgPz0DFT66UNX8/Jy\",\n            \"createdAt\": \"2023-01-22T18:12:28+01:00\",\n            \"client\": {\n                \"id\": 14,\n                \"name\": \"aliquid\",\n                \"email\": \"martine.andre@cousin.net\",\n                \"roles\": [\n                    \"ROLE_USER\"\n                ],\n                \"password\": \"$2y$13$V1xEIh9SuWfvHECXSmP3wuFY/ql0kaKM88uxz.yu1kv/r2tvpLSTW\",\n                \"createdAt\": \"2023-01-22T18:12:26+01:00\"\n            }\n        },\n        {\n            \"id\": 148,\n            \"username\": \"repellat temporibus\",\n            \"email\": \"celine39@leroux.com\",\n            \"password\": \"$2y$13$JhJa7Qg35l6eiNkZlZJV5uC9I4ghvqO.uZCJYuXTillPQJsIySf8a\",\n            \"createdAt\": \"2023-01-22T18:12:29+01:00\",\n            \"client\": {\n                \"id\": 14,\n                \"name\": \"aliquid\",\n                \"email\": \"martine.andre@cousin.net\",\n                \"roles\": [\n                    \"ROLE_USER\"\n                ],\n                \"password\": \"$2y$13$V1xEIh9SuWfvHECXSmP3wuFY/ql0kaKM88uxz.yu1kv/r2tvpLSTW\",\n                \"createdAt\": \"2023-01-22T18:12:26+01:00\"\n            }\n        }\n    ],\n    \"totalCount\": 26,\n    \"paginatorOptions\": {\n        \"pageParameterName\": \"page\",\n        \"sortFieldParameterName\": \"sort\",\n        \"sortDirectionParameterName\": \"direction\",\n        \"filterFieldParameterName\": \"filterField\",\n        \"filterValueParameterName\": \"filterValue\",\n        \"distinct\": true,\n        \"pageOutOfRange\": \"ignore\",\n        \"defaultLimit\": 10\n    },\n    \"customParameters\": [],\n    \"route\": \"userList\",\n    \"params\": [],\n    \"pageRange\": 5,\n    \"template\": \"@KnpPaginator/Pagination/sliding.html.twig\",\n    \"sortableTemplate\": \"@KnpPaginator/Pagination/sortable_link.html.twig\",\n    \"filtrationTemplate\": \"@KnpPaginator/Pagination/filtration.html.twig\"\n}"
+				}
+			]
+		},
+		{
+			"name": "https://127.0.0.1:8000/api/users/146",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY4ODUyMTMsImV4cCI6MTY3Njg4NzAxMywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.TCUxiUDRWpgEtHaZg5jZA8orw8-7gVzGQqbSBPjNgbD0JtafB_hcPnblVoQTS29pEhkiVPD_W_dxlDIgnBDWLwJndtPdoaZ5c3NMlMfGknHKylkfXiJZlVWUC7U1hR1jRxCHMax4M1jjMeSNDZPHV_UCei-JQLfopnqePLyGDKTfrG6m-bFXoA2dOHrLZqwwxmaVJ846ptFEpjutF-iQff8AjJmCUcHmjF2EswrCvHBSeguko5oGxQ5t8HHDVQrP3Jq5fSrJS-xsSoKsIjBflVetiksWodaFcRNt32HZVDfqdxKhINSulFgufBbeJoh18Rg2rhXwyIFc8GZ9eEjq3w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://127.0.0.1:8000/api/users/146",
+					"protocol": "https",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"146"
+					]
+				},
+				"description": "Get the details of a user depending to his id"
+			},
+			"response": [
+				{
+					"name": "https://127.0.0.1:8000/api/users/146",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY4ODUyMTMsImV4cCI6MTY3Njg4NzAxMywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.TCUxiUDRWpgEtHaZg5jZA8orw8-7gVzGQqbSBPjNgbD0JtafB_hcPnblVoQTS29pEhkiVPD_W_dxlDIgnBDWLwJndtPdoaZ5c3NMlMfGknHKylkfXiJZlVWUC7U1hR1jRxCHMax4M1jjMeSNDZPHV_UCei-JQLfopnqePLyGDKTfrG6m-bFXoA2dOHrLZqwwxmaVJ846ptFEpjutF-iQff8AjJmCUcHmjF2EswrCvHBSeguko5oGxQ5t8HHDVQrP3Jq5fSrJS-xsSoKsIjBflVetiksWodaFcRNt32HZVDfqdxKhINSulFgufBbeJoh18Rg2rhXwyIFc8GZ9eEjq3w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://127.0.0.1:8000/api/users/146",
+							"protocol": "https",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"146"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Allow",
+							"value": "GET, DELETE"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Feb 2023 09:31:58 GMT"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.12"
+						},
+						{
+							"key": "X-Robots-Tag",
+							"value": "noindex"
+						},
+						{
+							"key": "Content-Length",
+							"value": "518"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 146,\n    \"username\": \"facilis officia\",\n    \"email\": \"courtois.jeanne@noos.fr\",\n    \"password\": \"$2y$13$07Qte73vnYCHsv0EqzrjWOT4YY0p0xtJAdO/XT2PtTCjo.OZY3gyO\",\n    \"createdAt\": \"2023-01-22T18:12:27+01:00\",\n    \"client\": {\n        \"id\": 14,\n        \"name\": \"aliquid\",\n        \"email\": \"martine.andre@cousin.net\",\n        \"roles\": [\n            \"ROLE_USER\"\n        ],\n        \"password\": \"$2y$13$V1xEIh9SuWfvHECXSmP3wuFY/ql0kaKM88uxz.yu1kv/r2tvpLSTW\",\n        \"createdAt\": \"2023-01-22T18:12:26+01:00\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "https://127.0.0.1:8000/api/users",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY4ODUyMTMsImV4cCI6MTY3Njg4NzAxMywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.TCUxiUDRWpgEtHaZg5jZA8orw8-7gVzGQqbSBPjNgbD0JtafB_hcPnblVoQTS29pEhkiVPD_W_dxlDIgnBDWLwJndtPdoaZ5c3NMlMfGknHKylkfXiJZlVWUC7U1hR1jRxCHMax4M1jjMeSNDZPHV_UCei-JQLfopnqePLyGDKTfrG6m-bFXoA2dOHrLZqwwxmaVJ846ptFEpjutF-iQff8AjJmCUcHmjF2EswrCvHBSeguko5oGxQ5t8HHDVQrP3Jq5fSrJS-xsSoKsIjBflVetiksWodaFcRNt32HZVDfqdxKhINSulFgufBbeJoh18Rg2rhXwyIFc8GZ9eEjq3w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Phoesuccess\",\r\n    \"email\": \"phone@api.net\",\r\n    \"password\": \"phone\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://127.0.0.1:8000/api/users",
+					"protocol": "https",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users"
+					]
+				},
+				"description": "Create a user"
+			},
+			"response": [
+				{
+					"name": "https://127.0.0.1:8000/api/users",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY4ODUyMTMsImV4cCI6MTY3Njg4NzAxMywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.TCUxiUDRWpgEtHaZg5jZA8orw8-7gVzGQqbSBPjNgbD0JtafB_hcPnblVoQTS29pEhkiVPD_W_dxlDIgnBDWLwJndtPdoaZ5c3NMlMfGknHKylkfXiJZlVWUC7U1hR1jRxCHMax4M1jjMeSNDZPHV_UCei-JQLfopnqePLyGDKTfrG6m-bFXoA2dOHrLZqwwxmaVJ846ptFEpjutF-iQff8AjJmCUcHmjF2EswrCvHBSeguko5oGxQ5t8HHDVQrP3Jq5fSrJS-xsSoKsIjBflVetiksWodaFcRNt32HZVDfqdxKhINSulFgufBbeJoh18Rg2rhXwyIFc8GZ9eEjq3w",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Phoesuccess\",\r\n    \"email\": \"phone@api.net\",\r\n    \"password\": \"phone\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://127.0.0.1:8000/api/users",
+							"protocol": "https",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Allow",
+							"value": "POST"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Feb 2023 09:33:28 GMT"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.12"
+						},
+						{
+							"key": "X-Robots-Tag",
+							"value": "noindex"
+						},
+						{
+							"key": "Content-Length",
+							"value": "504"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 205,\n    \"username\": \"Phoesuccess\",\n    \"email\": \"phone@api.net\",\n    \"password\": \"$2y$13$.gmWkd2AkacGca4kpWXmcu1XdXXRrtFzo5yi/QZTBoIRH3z9i4pxu\",\n    \"createdAt\": \"2023-02-20T10:33:25+01:00\",\n    \"client\": {\n        \"id\": 14,\n        \"name\": \"aliquid\",\n        \"email\": \"martine.andre@cousin.net\",\n        \"roles\": [\n            \"ROLE_USER\"\n        ],\n        \"password\": \"$2y$13$V1xEIh9SuWfvHECXSmP3wuFY/ql0kaKM88uxz.yu1kv/r2tvpLSTW\",\n        \"createdAt\": \"2023-01-22T18:12:26+01:00\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "https://127.0.0.1:8000/api/users/150",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY4ODUyMTMsImV4cCI6MTY3Njg4NzAxMywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.TCUxiUDRWpgEtHaZg5jZA8orw8-7gVzGQqbSBPjNgbD0JtafB_hcPnblVoQTS29pEhkiVPD_W_dxlDIgnBDWLwJndtPdoaZ5c3NMlMfGknHKylkfXiJZlVWUC7U1hR1jRxCHMax4M1jjMeSNDZPHV_UCei-JQLfopnqePLyGDKTfrG6m-bFXoA2dOHrLZqwwxmaVJ846ptFEpjutF-iQff8AjJmCUcHmjF2EswrCvHBSeguko5oGxQ5t8HHDVQrP3Jq5fSrJS-xsSoKsIjBflVetiksWodaFcRNt32HZVDfqdxKhINSulFgufBbeJoh18Rg2rhXwyIFc8GZ9eEjq3w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://127.0.0.1:8000/api/users/150",
+					"protocol": "https",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"150"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "Delete a user "
+			},
+			"response": [
+				{
+					"name": "https://127.0.0.1:8000/api/users/150",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzY4ODUyMTMsImV4cCI6MTY3Njg4NzAxMywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibWFydGluZS5hbmRyZUBjb3VzaW4ubmV0In0.TCUxiUDRWpgEtHaZg5jZA8orw8-7gVzGQqbSBPjNgbD0JtafB_hcPnblVoQTS29pEhkiVPD_W_dxlDIgnBDWLwJndtPdoaZ5c3NMlMfGknHKylkfXiJZlVWUC7U1hR1jRxCHMax4M1jjMeSNDZPHV_UCei-JQLfopnqePLyGDKTfrG6m-bFXoA2dOHrLZqwwxmaVJ846ptFEpjutF-iQff8AjJmCUcHmjF2EswrCvHBSeguko5oGxQ5t8HHDVQrP3Jq5fSrJS-xsSoKsIjBflVetiksWodaFcRNt32HZVDfqdxKhINSulFgufBbeJoh18Rg2rhXwyIFc8GZ9eEjq3w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://127.0.0.1:8000/api/users/150",
+							"protocol": "https",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"150"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Allow",
+							"value": "GET, DELETE"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Feb 2023 09:35:02 GMT"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.12"
+						},
+						{
+							"key": "X-Robots-Tag",
+							"value": "noindex"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
